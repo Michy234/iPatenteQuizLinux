@@ -104,5 +104,14 @@ values to the uninstall command:
   --wineprefix /custom/path/wine-ipatente-quiz
 ```
 
+## Disclaimer
 
+This is an independent, unofficial project. The author is not affiliated with,
+endorsed by, or associated with iPatente or its owners. iPatente and related
+names and marks belong to their respective owners.
+
+This script was written entirely with OpenAI Codex. It is provided “as is,”
+without warranty of any kind, express or implied. The author makes no guarantee
+that it will work on every system and is not responsible for any damage or data
+loss resulting from its use. Use it at your own risk.
 
