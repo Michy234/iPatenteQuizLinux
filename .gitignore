@@ -1,0 +1,13 @@
+# Downloaded Microsoft packages
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+
+# Local Wine and installation data
+.wine-ipatente-quiz/
+iPatenteQuiz/
+iPatenteQuiz.previous.*/
+
+# Temporary extraction files
+ipatente-quiz.*/
