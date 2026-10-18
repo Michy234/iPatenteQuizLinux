@@ -59,6 +59,12 @@
 Wine. It starts from an <code class="language-plaintext highlighter-rouge">.msixbundle</code> you have already obtained: the script
 never downloads the application package itself.</p>
 
+<h2 align="center">Quick install</h2>
+
+<pre align="center"><code>curl -fsSL \
+  https://raw.githubusercontent.com/Michy234/iPatenteQuizLinux/main/install.sh \
+  | bash -s -- /path/to/iPatenteQuiz.msixbundle</code></pre>
+
 <h2 id="table-of-contents">Table of contents</h2>
 
 <ul>
@@ -89,26 +95,28 @@ Emoji into the WINEPREFIX, so as not to break the app (you can disable font inst
 them before changing anything. It detects common Debian/Ubuntu, Fedora/RHEL,
 Arch/Manjaro, and openSUSE systems and suggests an installation command.</p>
 
-<p><code class="language-plaintext highlighter-rouge">curl</code> and <code class="language-plaintext highlighter-rouge">winetricks</code> are recommended. They install extra icon, text, and
-emoji fonts in the isolated Wine prefix. Font downloads are optional and can be
-disabled with <code class="language-plaintext highlighter-rouge">--no-fonts</code>. The installer uses a small spinner with elapsed
-time for longer setup steps. During font downloads, curl shows the transfer
-percentage, elapsed time, and estimated time remaining.</p>
+<p><code class="language-plaintext highlighter-rouge">curl</code> is needed for the remote install command below; it is also used to
+download extra icon, text, and emoji fonts into the isolated Wine prefix.
+<code class="language-plaintext highlighter-rouge">winetricks</code> is recommended for font installation. Font downloads are optional
+and can be disabled with <code class="language-plaintext highlighter-rouge">--no-fonts</code>. The installer uses a small spinner with
+elapsed time for longer setup steps. During font downloads, curl shows the
+transfer percentage, elapsed time, and estimated time remaining.</p>
 
 <h2 id="install">Install</h2>
 
-<p>Make <a href="https://raw.githubusercontent.com/Michy234/iPatenteQuizLinux/refs/heads/main/install.sh">the script</a> executable and give it your .msixbundle:</p>
+<p>Run the installer directly from GitHub with <code class="language-plaintext highlighter-rouge">curl</code> and pass the path to your
+already downloaded <code class="language-plaintext highlighter-rouge">.msixbundle</code>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x install.sh
-./install.sh /path/to/iPatenteQuiz.msixbundle
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -fsSL https://raw.githubusercontent.com/Michy234/iPatenteQuizLinux/main/install.sh | bash -s -- /path/to/iPatenteQuiz.msixbundle
 </code></pre></div></div>
-
-<p>You can also run <code class="language-plaintext highlighter-rouge">./install.sh</code> by itself; it will ask for the bundle’s path.</p>
 
 <p>To also create a Desktop launcher:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./install.sh <span class="nt">--desktop</span> /path/to/iPatenteQuiz.msixbundle
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -fsSL https://raw.githubusercontent.com/Michy234/iPatenteQuizLinux/main/install.sh | bash -s -- --desktop /path/to/iPatenteQuiz.msixbundle
 </code></pre></div></div>
+
+<p>This runs the installer script from the remote repository; it does not download
+the <code class="language-plaintext highlighter-rouge">.msixbundle</code>, which you must obtain separately.</p>
 
 <p>By default, the application is installed to <code class="language-plaintext highlighter-rouge">~/.local/share/iPatenteQuiz</code> and
 uses the isolated prefix <code class="language-plaintext highlighter-rouge">~/.wine-ipatente-quiz</code>. Reinstalling preserves the

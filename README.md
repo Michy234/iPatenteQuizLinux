@@ -15,6 +15,12 @@ An installer for running the Windows/UWP build of iPatente Quiz on Linux with
 Wine. It starts from an `.msixbundle` you have already obtained: the script
 never downloads the application package itself.
 
+<h2 align="center">Quick install</h2>
+
+<pre align="center"><code>curl -fsSL \
+  https://raw.githubusercontent.com/Michy234/iPatenteQuizLinux/main/install.sh \
+  | bash -s -- /path/to/iPatenteQuiz.msixbundle</code></pre>
+
 ## Table of contents
 
 - [What it does](#what-it-does)
@@ -41,28 +47,30 @@ Required commands are `wine`, `7z`, `unzip`, and `asar`. The script checks for
 them before changing anything. It detects common Debian/Ubuntu, Fedora/RHEL,
 Arch/Manjaro, and openSUSE systems and suggests an installation command.
 
-`curl` and `winetricks` are recommended. They install extra icon, text, and
-emoji fonts in the isolated Wine prefix. Font downloads are optional and can be
-disabled with `--no-fonts`. The installer uses a small spinner with elapsed
-time for longer setup steps. During font downloads, curl shows the transfer
-percentage, elapsed time, and estimated time remaining.
+`curl` is needed for the remote install command below; it is also used to
+download extra icon, text, and emoji fonts into the isolated Wine prefix.
+`winetricks` is recommended for font installation. Font downloads are optional
+and can be disabled with `--no-fonts`. The installer uses a small spinner with
+elapsed time for longer setup steps. During font downloads, curl shows the
+transfer percentage, elapsed time, and estimated time remaining.
 
 ## Install
 
-Make [the script](https://raw.githubusercontent.com/Michy234/iPatenteQuizLinux/refs/heads/main/install.sh) executable and give it your .msixbundle:
+Run the installer directly from GitHub with `curl` and pass the path to your
+already downloaded `.msixbundle`:
 
 ```bash
-chmod +x install.sh
-./install.sh /path/to/iPatenteQuiz.msixbundle
+curl -fsSL https://raw.githubusercontent.com/Michy234/iPatenteQuizLinux/main/install.sh | bash -s -- /path/to/iPatenteQuiz.msixbundle
 ```
-
-You can also run `./install.sh` by itself; it will ask for the bundle's path.
 
 To also create a Desktop launcher:
 
 ```bash
-./install.sh --desktop /path/to/iPatenteQuiz.msixbundle
+curl -fsSL https://raw.githubusercontent.com/Michy234/iPatenteQuizLinux/main/install.sh | bash -s -- --desktop /path/to/iPatenteQuiz.msixbundle
 ```
+
+This runs the installer script from the remote repository; it does not download
+the `.msixbundle`, which you must obtain separately.
 
 By default, the application is installed to `~/.local/share/iPatenteQuiz` and
 uses the isolated prefix `~/.wine-ipatente-quiz`. Reinstalling preserves the
