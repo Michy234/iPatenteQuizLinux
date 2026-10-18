@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="I2QQkE1HwMFgu7RP6avcbUdUgTxj_bPwUh1wJbtsDog" />
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>iPatenteQuizLinux | An unofficial Bash installer for running the iPatente Quiz Windows/UWP app on Linux with Wine.</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="iPatenteQuizLinux" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An unofficial Bash installer for running the iPatente Quiz Windows/UWP app on Linux with Wine." />
+<meta property="og:description" content="An unofficial Bash installer for running the iPatente Quiz Windows/UWP app on Linux with Wine." />
+<link rel="canonical" href="https://michy234.github.io/iPatenteQuizLinux/" />
+<meta property="og:url" content="https://michy234.github.io/iPatenteQuizLinux/" />
+<meta property="og:site_name" content="iPatenteQuizLinux" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="iPatenteQuizLinux" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"An unofficial Bash installer for running the iPatente Quiz Windows/UWP app on Linux with Wine.","headline":"iPatenteQuizLinux","name":"iPatenteQuizLinux","url":"https://michy234.github.io/iPatenteQuizLinux/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/iPatenteQuizLinux/assets/css/style.css?v=37c0bd3c35937dade11e7e519269e0766446c2cb">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/iPatenteQuizLinux/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://michy234.github.io/iPatenteQuizLinux/">iPatenteQuizLinux</a></h1>
+      
+
+      
+<p align="center">
+  <img src="assets/ipatente-quiz.png" width="128" alt="iPatente Quiz icon" />
+</p>
+
+<h1 align="center">iPatente Quiz for Linux</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-Linux-2ea44f?logo=linux&amp;logoColor=white" alt="Linux" />
+  <img src="https://img.shields.io/badge/runtime-Wine-7b68ee?logo=wine&amp;logoColor=white" alt="Wine" />
+  <img src="https://img.shields.io/badge/script-Bash-4eaa25?logo=gnubash&amp;logoColor=white" alt="Bash" />
+</p>
+
+<p>An installer for running the Windows/UWP build of iPatente Quiz on Linux with
+Wine. It starts from an <code class="language-plaintext highlighter-rouge">.msixbundle</code> you have already obtained: the script
+never downloads the application package itself.</p>
+
+<h2 id="table-of-contents">Table of contents</h2>
+
+<ul>
+  <li><a href="#what-it-does">What it does</a></li>
+  <li><a href="#requirements">Requirements</a></li>
+  <li><a href="#install">Install</a></li>
+  <li><a href="#launch">Launch</a></li>
+  <li><a href="#options">Options</a></li>
+  <li><a href="#uninstall">Uninstall</a></li>
+  <li><a href="#disclaimer">Disclaimer</a></li>
+</ul>
+
+<h2 id="what-it-does">What it does</h2>
+
+<ul>
+  <li>Extracts the correct APPX payload from an MSIX/AppX bundle.</li>
+  <li>Unpacks <code class="language-plaintext highlighter-rouge">app/resources/app.asar</code>, which is needed for the application to run
+correctly in Wine.</li>
+  <li>Creates a dedicated Wine prefix and application-menu launcher.</li>
+  <li>Registers the iPatente Quiz icon with the desktop environment.</li>
+  <li>Installs Framework7, Material Icons, Microsoft Core Fonts, and Noto Color
+Emoji into the WINEPREFIX, so as not to break the app (you can disable font installation with <code class="language-plaintext highlighter-rouge">--no-fonts</code>).</li>
+</ul>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>Required commands are <code class="language-plaintext highlighter-rouge">wine</code>, <code class="language-plaintext highlighter-rouge">7z</code>, <code class="language-plaintext highlighter-rouge">unzip</code>, and <code class="language-plaintext highlighter-rouge">asar</code>. The script checks for
+them before changing anything. It detects common Debian/Ubuntu, Fedora/RHEL,
+Arch/Manjaro, and openSUSE systems and suggests an installation command.</p>
+
+<p><code class="language-plaintext highlighter-rouge">curl</code> and <code class="language-plaintext highlighter-rouge">winetricks</code> are recommended. They install extra icon, text, and
+emoji fonts in the isolated Wine prefix. Font downloads are optional and can be
+disabled with <code class="language-plaintext highlighter-rouge">--no-fonts</code>. The installer uses a small spinner with elapsed
+time for longer setup steps. During font downloads, curl shows the transfer
+percentage, elapsed time, and estimated time remaining.</p>
+
+<h2 id="install">Install</h2>
+
+<p>Make the script executable and give it your .msixbundle:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x install.sh
+./install.sh /path/to/iPatenteQuiz.msixbundle
+</code></pre></div></div>
+
+<p>You can also run <code class="language-plaintext highlighter-rouge">./install.sh</code> by itself; it will ask for the bundle’s path.</p>
+
+<p>To also create a Desktop launcher:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./install.sh <span class="nt">--desktop</span> /path/to/iPatenteQuiz.msixbundle
+</code></pre></div></div>
+
+<p>By default, the application is installed to <code class="language-plaintext highlighter-rouge">~/.local/share/iPatenteQuiz</code> and
+uses the isolated prefix <code class="language-plaintext highlighter-rouge">~/.wine-ipatente-quiz</code>. Reinstalling preserves the
+previous application directory as a timestamped backup.</p>
+
+<h2 id="launch">Launch</h2>
+
+<p>Open <strong>iPatente Quiz</strong> from the application menu, or run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ipatente-quiz
+</code></pre></div></div>
+
+<h2 id="options">Options</h2>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--desktop              also create a launcher on the desktop
+--no-fonts             skip downloaded and supplementary fonts
+--verbose              show detailed extraction and font setup output
+--app-dir DIRECTORY    custom application directory
+--wineprefix DIRECTORY custom Wine prefix directory
+--uninstall            remove the app, prefix, launchers, icon, and backups
+</code></pre></div></div>
+
+<p>For all options, run <code class="language-plaintext highlighter-rouge">./install.sh --help</code>.</p>
+
+<h2 id="uninstall">Uninstall</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./install.sh <span class="nt">--uninstall</span>
+</code></pre></div></div>
+
+<p>If a custom application directory or Wine prefix was used, provide the same
+values to the uninstall command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./install.sh <span class="nt">--uninstall</span> <span class="se">\</span>
+  <span class="nt">--app-dir</span> /custom/path/iPatenteQuiz <span class="se">\</span>
+  <span class="nt">--wineprefix</span> /custom/path/wine-ipatente-quiz
+</code></pre></div></div>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>This is an independent, unofficial project. The author is not affiliated with,
+endorsed by, or associated with iPatente or its owners. iPatente and related
+names and marks belong to their respective owners.</p>
+
+<p>This script was written entirely with OpenAI Codex. It is provided “as is,”
+without warranty of any kind, express or implied. The author makes no guarantee
+that it will work on every system and is not responsible for any damage or data
+loss resulting from its use. Use it at your own risk.</p>
+
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
