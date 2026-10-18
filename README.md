@@ -49,7 +49,7 @@ percentage, elapsed time, and estimated time remaining.
 
 ## Install
 
-Make the script executable and give it your .msixbundle:
+Make [the script](https://raw.githubusercontent.com/Michy234/iPatenteQuizLinux/refs/heads/main/install.sh) executable and give it your .msixbundle:
 
 ```bash
 chmod +x install.sh
